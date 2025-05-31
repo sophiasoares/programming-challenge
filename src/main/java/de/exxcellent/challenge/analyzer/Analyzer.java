@@ -9,9 +9,9 @@ public interface Analyzer {
     /**
      * Returns the index of the row with the minimum spread.
      * @param table The table to be analyzed
-     * @param columnName1 The name of the first column
-     * @param columnName2 The name of the second column
+     * @param col1Name The name of the first column
+     * @param col2Name The name of the second column
      * @return The index of the row with the minimum spread
      */
-    int getMinimumSpreadIndex(Table table, String columnName1, String columnName2);
+    int getMinimumSpreadIndex(Table table, String col1Name, String col2Name);
 }

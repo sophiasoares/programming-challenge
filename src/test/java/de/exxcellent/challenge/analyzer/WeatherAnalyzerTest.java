@@ -38,6 +38,25 @@ class WeatherAnalyzerTest {
     }
     
     /**
+     * Tests if the minimum spread is found correctly with various temperature formats
+     */
+    @Test
+    void shouldHandleVariousTemperatureFormats() {
+        String[] columnNames = {"Day", "MxT", "MnT"};
+        Object[][] data = {
+            {"1", "20°C", "10°C"},     // spread 10
+            {"2", "25 °F", "5°F"},     // spread 20
+            {"3", "15˚", "12˚"},       // spread 3 (minimum)
+            {"4", " 30 ", " 15 "}      // spread 15
+        };
+        Table table = new Table(columnNames, data);
+        
+        int result = analyzer.getMinimumSpreadIndex(table, "MxT", "MnT");
+        
+        assertEquals(2, result);
+    }
+    
+    /**
      * Tests if the minimum spread is found correctly when there are negative temperatures
      */
     @Test
