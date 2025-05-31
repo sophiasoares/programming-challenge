@@ -28,7 +28,7 @@ public class CsvReader implements Reader {
         }
 
         try (inputStream;
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             
             // Read header
             String headerLine = reader.readLine();

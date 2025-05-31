@@ -1,9 +1,11 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.analyzer.Analyzer;
 import de.exxcellent.challenge.analyzer.WeatherAnalyzer;
 import de.exxcellent.challenge.analyzer.FootballAnalyzer;
 import de.exxcellent.challenge.model.Table;
 import de.exxcellent.challenge.util.CsvReader;
+import de.exxcellent.challenge.util.DataPreprocessing;
 import de.exxcellent.challenge.util.Reader;
 
 /**
@@ -20,11 +22,14 @@ public final class App {
      */
     public static void main(String... args) {
         Reader reader = new CsvReader();
-        WeatherAnalyzer weatherAnalyzer = new WeatherAnalyzer();
-        FootballAnalyzer footballAnalyzer = new FootballAnalyzer();
+        Analyzer weatherAnalyzer = new WeatherAnalyzer();
+        Analyzer footballAnalyzer = new FootballAnalyzer();
+        
+        // Read and preprocess weather data
+        Table weatherTable = reader.readData("de/exxcellent/challenge/weather.csv");
+        weatherTable = DataPreprocessing.cleanWeatherData(weatherTable);
         
         // Analyze weather data
-        Table weatherTable = reader.readData("de/exxcellent/challenge/weather.csv");
         int dayIndex = weatherAnalyzer.getMinimumSpreadIndex(weatherTable, "MxT", "MnT");
         String dayWithSmallestTempSpread = (String) weatherTable.getData()[dayIndex][0]; // Day is first column
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
