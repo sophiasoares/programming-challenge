@@ -1,11 +1,16 @@
 package de.exxcellent.challenge.analyzer;
 
 import de.exxcellent.challenge.model.Table;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Abstract class for analyzing data with common functionality
  */
 public abstract class Analyzer {
+    
+    private static final Logger logger = LogManager.getLogger(Analyzer.class);
+    
     /**
      * Returns the index of the row with the minimum spread.
      * @param table The table to be analyzed
@@ -43,8 +48,9 @@ public abstract class Analyzer {
                     minSpreadIndex = i;
                 }
             } catch (NumberFormatException e) {
-                // Skip rows with invalid numbers
-                System.err.println("Could not parse value in row " + i);
+                // Skip rows with invalid numbers but log which values caused the problem
+                logger.warn("Row {}: Could not parse values '{}' and '{}' from columns {} and {}", 
+                    i + 1, data[i][col1Index], data[i][col2Index], col1Name, col2Name);
             }
         }
         

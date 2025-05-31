@@ -7,6 +7,8 @@ import de.exxcellent.challenge.model.Table;
 import de.exxcellent.challenge.util.CsvReader;
 import de.exxcellent.challenge.util.DataPreprocessing;
 import de.exxcellent.challenge.util.Reader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
@@ -15,6 +17,8 @@ import de.exxcellent.challenge.util.Reader;
  * @author Benjamin Schmid <benjamin.schmid@exxcellent.de>
  */
 public final class App {
+    
+    private static final Logger logger = LogManager.getLogger(App.class);
 
     /**
      * This is the main entry method of your program.
@@ -32,12 +36,12 @@ public final class App {
         // Analyze weather data
         int dayIndex = weatherAnalyzer.getMinimumSpreadIndex(weatherTable, "MxT", "MnT");
         String dayWithSmallestTempSpread = (String) weatherTable.getData()[dayIndex][0]; // Day is first column
-        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
+        logger.info("Day with smallest temperature spread : {}", dayWithSmallestTempSpread);
     
         // Analyze football data
         Table footballTable = reader.readData("de/exxcellent/challenge/football.csv");
         int teamIndex = footballAnalyzer.getMinimumSpreadIndex(footballTable, "Goals", "Goals Allowed");
         String teamWithSmallestGoalSpread = (String) footballTable.getData()[teamIndex][0]; // Team is first column
-        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+        logger.info("Team with smallest goal spread       : {}", teamWithSmallestGoalSpread);
     }
 }
