@@ -1,17 +1,39 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    branches: [ main, master, challenge-weatherdata ]
+  pull_request:
+    branches: [ main, master ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
+    
     steps:
       - uses: actions/checkout@v3
+      
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Build with Maven
+          cache: 'maven'
+          
+      - name: Build and Test
         run: mvn --batch-mode --update-snapshots verify
+        
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Upload Test Results
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            target/surefire-reports/
+            target/site/
