@@ -24,7 +24,7 @@ public class CsvReader implements Reader {
         // Get the file from the resources folder
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
         if (inputStream == null) {
-            throw new IllegalArgumentException("File " + path + "was not found");
+            throw new IllegalArgumentException("File " + path + " was not found");
         }
 
         try (inputStream;
