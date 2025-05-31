@@ -20,4 +20,16 @@ public class Table {
     public Object[][] getData() {
         return data;
     }
+
+    /**
+     * Returns the index of the column with the given name
+     * @param columnName The name of the column to find
+     * @return The index of the column, or -1 if not found
+     */
+    public int getColumnIndex(String columnName) {
+        for (int i = 0; i < columnNames.length; i++) {
+            if (columnNames[i].equals(columnName)) return i;
+        }
+        return -1;
+    }
 }
