@@ -11,6 +11,7 @@ In this file I explain my track of thought to solve the challenge:
 * Clean structure
 * Small, meaningful and frequent commits
 * Tests before implementation 
+* Code validation
 
 == Thoughts
 
@@ -25,5 +26,6 @@ In this file I explain my track of thought to solve the challenge:
 * Table model -> with column names and a matrix of Object (because we don't know what the file might contain)
 * Tests
 * Implementation of a csv reader
+* Validation 
 * Creation of an analyzer class
 * Solve the footbal problem using the existing code and making minimal changes

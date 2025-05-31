@@ -12,4 +12,12 @@ public class Table {
         this.columnNames = columnNames;
         this.data = data;
     }
+
+    public String[] getColumnNames() {
+        return columnNames;
+    }
+
+    public Object[][] getData() {
+        return data;
+    }
 }
