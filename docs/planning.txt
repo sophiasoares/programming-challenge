@@ -1,4 +1,3 @@
-
 In this file I explain my track of thought to solve the challenge:
 
 == My goals
@@ -18,6 +17,24 @@ In this file I explain my track of thought to solve the challenge:
 * The challenge is separated into two parts: reading the file and analyzing the data (finding the spread)
 * First focus on the weather problem, but keeping in mind the code should be expandable and reusable
 * Don't tightly couple the methods and classes (ex: make a class to read different types of sources, not only csv files)
+* Should Analyzer be an interface?
+    - current requirements:
+        * Both tasks need to find minimum spread and work with numerical differences between two columns
+        * Both need to return a value from a different column based on the row with minimum spread
+        * Both need to handle parsing strings to numbers (except team names)
+    - Interface pros:
+        * Future extensibility (we might need different types of analysis later)
+        * Consistent wiht current architecture (we already use Reader interface)
+        * Could have specialized methods for weather/football in their implemntations
+        * Different data types might need different parsing strategies
+    - interface cons:
+        * Main logic (finding minimum spread) is very similar for both cases
+        * Some code duplication between implementations
+    - Decision:
+        * Create a simple Analyzer interface with getMinimumSpreadIndex method
+        * Each implementation handles its own parsing
+        * It keeps the code simple and straightforward
+        * Consistent with Reader interface pattern
 * Expand the code to solve the football challenge at the end (shouldn't be hard if the previous code is reusable)
 
 == Steps
@@ -27,5 +44,9 @@ In this file I explain my track of thought to solve the challenge:
 * Tests
 * Implementation of a csv reader
 * Validation 
-* Creation of an analyzer class
-* Solve the footbal problem using the existing code and making minimal changes
+* Creation of Analyzer interface
+* Implementation of skeleton for the weather analyzer
+* Tests for analyzer
+* Implement getMinimumSpreadIndex for weather
+* Integration of solutio in main class
+* Solve football challenge
