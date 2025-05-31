@@ -1,0 +1,29 @@
+
+In this file I explain my track of thought to solve the challenge:
+
+== My goals
+
+* Separation of concerns (each component has its own responsibility)
+* Reusability
+* Redable code
+* Well documented
+* Meaningful class/method names
+* Clean structure
+* Small, meaningful and frequent commits
+* Tests before implementation 
+
+== Thoughts
+
+* The challenge is separated into two parts: reading the file and analyzing the data (finding the spread)
+* First focus on the weather problem, but keeping in mind the code should be expandable and reusable
+* Don't tightly couple the methods and classes (ex: make a class to read different types of sources, not only csv files)
+* Expand the code to solve the football challenge at the end (shouldn't be hard if the previous code is reusable)
+
+== Steps
+
+* Reader (creation of an interface)
+* Table model -> with column names and a matrix of Object (because we don't know what the file might contain)
+* Tests
+* Implementation of a csv reader
+* Creation of an analyzer class
+* Solve the footbal problem using the existing code and making minimal changes
