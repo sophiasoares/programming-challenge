@@ -18,7 +18,8 @@ In this file I explain my track of thought to solve the challenge:
 * First focus on the weather problem, but keeping in mind the code should be expandable and reusable
 * Don't tightly couple the methods and classes (ex: make a class to read different types of sources, not only csv files)
 * Data might not be clean (example: temperature might have units or symbols -> 23°C)
-* Should Analyzer be an interface?
+* Expand the code to solve the football challenge at the end (shouldn't be hard if the previous code is reusable)
+* Should Analyzer be an interface or an abstract class?
     - current requirements:
         * Both tasks need to find minimum spread and work with numerical differences between two columns
         * Both need to return a value from a different column based on the row with minimum spread
@@ -31,12 +32,22 @@ In this file I explain my track of thought to solve the challenge:
     - interface cons:
         * Main logic (finding minimum spread) is very similar for both cases
         * Some code duplication between implementations
-    - Decision:
+    - Abstract class pros:
+        * Common spread calculation logic can be shared
+        * Reduces code duplication between implementations
+        * Makes it easier to add new analyzers
+    - Abstract class cons:
+        * Less flexible than interface (Java single inheritance)
+        * Forces all analyzers to use same spread calculation algorithm
+    - Initial decision:
         * Create a simple Analyzer interface with getMinimumSpreadIndex method
         * Each implementation handles its own parsing
         * It keeps the code simple and straightforward
-        * Consistent with Reader interface pattern
-* Expand the code to solve the football challenge at the end (shouldn't be hard if the previous code is reusable)
+    - refactored decision:
+        * Create an abstract Analyzer class with common getMinimumSpreadIndex implementation
+        * Keeps the code DRY and maintainable
+        * Ensures consistent spread calculation across analyzers
+        * Still allows analyzers to have their own specific methods
 
 == Steps
 
@@ -44,10 +55,10 @@ In this file I explain my track of thought to solve the challenge:
 * Table model -> with column names and a matrix of Object (because we don't know what the file might contain)
 * Tests
 * Implementation of a csv reader
-* Validation 
-* Creation of Analyzer interface
+* Validations everywhere 
+* Creation of Analyzer abstract class
 * Implementation of skeleton for the weather analyzer
 * Tests for analyzer
-* Implement getMinimumSpreadIndex for weather
-* Integration of solutio in main class
+* Implement getMinimumSpreadIndex in abstract class
+* Integration of solution in main class
 * Solve football challenge
