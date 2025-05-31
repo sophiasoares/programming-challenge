@@ -17,6 +17,7 @@ In this file I explain my track of thought to solve the challenge:
 * The challenge is separated into two parts: reading the file and analyzing the data (finding the spread)
 * First focus on the weather problem, but keeping in mind the code should be expandable and reusable
 * Don't tightly couple the methods and classes (ex: make a class to read different types of sources, not only csv files)
+* Data might not be clean (example: temperature might have units or symbols -> 23°C)
 * Should Analyzer be an interface?
     - current requirements:
         * Both tasks need to find minimum spread and work with numerical differences between two columns
